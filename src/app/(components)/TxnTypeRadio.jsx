@@ -1,45 +1,39 @@
 'use client';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
-const radiosx = {
-    display: 'none',
-}
-
-const labelsx = {
-    transition: 'all .6s',
-    border: '1px solid #654321',
-    padding: '.2em .5em',
-    borderRadius: '.2em',
-    '&:has(:checked)': {
-        background: 'lightblue'
-    }
-}
+import { useState } from "react";
 
 export default function TxnTypeRadio() {
+    const [type, setType] = useState('spot');
+
+    function handleChange(value) {
+        setType(value)
+    }
+
     return (
-        <RadioGroup row
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="radio-buttons-group">
-
-            <FormControlLabel value="female" control={
-                <Radio sx={radiosx} />
-            } label={<CustomLabel>現買賣</CustomLabel>} sx={labelsx} />
-
-            <FormControlLabel value="daily" control={
-                <Radio sx={radiosx} />
-            } label={<CustomLabel>當沖</CustomLabel>} sx={labelsx} />
-
-        </RadioGroup >
+        <div className='flex flex-row gap-2'>
+            {type}
+            <RadioInput id={'spot'} onChange={(e) => handleChange(e.target.value)}>現買賣</RadioInput>
+            <RadioInput id={'daily'} onChange={(e) => handleChange(e.target.value)}>當沖</RadioInput>
+        </div>
     );
 }
 
-function CustomLabel({ children }) {
-    return <span style={{
-        fontSize: '1.4em',
-    }}>{children}</span>
+function RadioInput({ children, id, onChange }) {
+    return <div className='inline-block transition-all'>
+        <label for={id} className='
+        transition-all ease-in-out duration-200
+        bg-white
+        border
+        rounded text-3xl
+        has-[:checked]:bg-indigo-400
+        has-[:checked]:text-indigo-100 
+        has-[:checked]:border-indigo-500'>
+            <input className='hidden peer'
+                type="radio" name="type" id={id} value={id}
+                onChange={onChange}
+            />
+            {/* <CheckIcon className='hidden size-4 peer-checked:inline-block'></CheckIcon> */}
+            <span>{children}</span>
+        </label>
+    </div>
 }

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { step } from '../(utils)/twstockFeeRule';
 import Decimal from 'decimal.js';
+import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 
 const height = '42px';
 
@@ -13,11 +14,6 @@ const Input = styled.input.attrs({ type: 'number' })`
     font-size:2em;
 `;
 
-const TooltipButton = styled.button.attrs({ type: 'button' })`
-    background: #01B468;
-    height: ${height};
-    aspect-ratio:5/7;
-`;
 
 export default function PriceInput() {
     const [price, setPrice] = useState(0);
@@ -34,10 +30,22 @@ export default function PriceInput() {
         setPrice(event.target.value);
     }
 
-    return <div className='flex items-end'>
-        <TooltipButton onClick={() => handleClick(false)} style={{ borderRadius: '20% 0 0 20%' }}>-</TooltipButton>
+    return <div className='flex items-end border border-slate-500 rounded-lg overflow-hidden'>
+
+
+        <button dir="ltr" className='bg-sky-300'
+            onClick={() => handleClick(false)} style={{ height: height }}>
+            <MinusIcon className='size-6'></MinusIcon>
+        </button>
+
         <Input value={price} onChange={handleChange}></Input>
-        <TooltipButton onClick={() => handleClick(true)} style={{ borderRadius: '0 20% 20% 0' }}>+</TooltipButton>
+
+        <button dir="rtl" className='bg-sky-300'
+            onClick={() => handleClick(true)} style={{ height: height }}>
+            <PlusIcon className='size-6'></PlusIcon>
+        </button>
+
+
     </div >
 
 }

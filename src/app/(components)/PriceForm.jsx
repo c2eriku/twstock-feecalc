@@ -34,27 +34,8 @@ export default function PriceForm() {
             <PriceInput></PriceInput>
             <FeeInfomation></FeeInfomation>
         </div>
-        <div className='col-span-1'>
+        <div className='col-span-2'>
             <TxnTypeRadio></TxnTypeRadio>
         </div>
     </div>
-
-    // return <Form>
-    //     <Row>
-    //         <Column>
-    //             <label>買入</label>
-    //             <PriceInput></PriceInput>
-    //             <FeeInfomation></FeeInfomation>
-    //         </Column>
-    //         <Column>
-    //             <label>賣出</label>
-    //             <PriceInput></PriceInput>
-    //             <FeeInfomation></FeeInfomation>
-    //         </Column>
-    //     </Row>
-    //     <Row>
-
-    //     </Row>
-    //     <TransactionTypePanel></TransactionTypePanel>
-    // </Form>
 }
