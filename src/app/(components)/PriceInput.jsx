@@ -1,51 +1,37 @@
 "use client";
 import { useState } from 'react';
-import styled from 'styled-components';
-import { step } from '../(utils)/twstockFeeRule';
-import Decimal from 'decimal.js';
+import { TwStockPrice } from '../(utils)/twstockFeeRule';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 
 const height = '42px';
 
-const Input = styled.input.attrs({ type: 'number' })`
-    width:100%;
-    height:${height};   
-    padding: .2em;
-    font-size:2em;
-`;
-
-
-export default function PriceInput() {
+export default function PriceInput({ onChange }) {
     const [price, setPrice] = useState(0);
 
     function handleClick(action) {
-        const c = action ? 1 : -1;
-        const upd = Decimal.add(price, Decimal.mul(step(price), c));
-        console.log(upd)
-        setPrice(upd);
+        const p = action ? TwStockPrice(price).next() : TwStockPrice(price).prev();
+        setPrice(p);
+        onChange(p);
     }
 
     function handleChange(event) {
-        console.log(event.target.value)
         setPrice(event.target.value);
+        onChange(event.target.value);
     }
 
-    return <div className='flex items-end border border-slate-500 rounded-lg overflow-hidden'>
+    return <div>
+        <div className='flex items-end border border-slate-500 rounded-lg overflow-hidden'>
+            <button dir="ltr" className='bg-gray-300 w-16'
+                onClick={() => handleClick(false)} style={{ height: height }}>
+                <MinusIcon className='inline-block size-6'></MinusIcon>
+            </button>
 
+            <input className='p-1 w-full text-xl text-center' value={price} onChange={handleChange} style={{ height: height }}></input>
 
-        <button dir="ltr" className='bg-sky-300'
-            onClick={() => handleClick(false)} style={{ height: height }}>
-            <MinusIcon className='size-6'></MinusIcon>
-        </button>
-
-        <Input value={price} onChange={handleChange}></Input>
-
-        <button dir="rtl" className='bg-sky-300'
-            onClick={() => handleClick(true)} style={{ height: height }}>
-            <PlusIcon className='size-6'></PlusIcon>
-        </button>
-
-
-    </div >
-
+            <button dir="rtl" className='bg-gray-300 w-16'
+                onClick={() => handleClick(true)} style={{ height: height }}>
+                <PlusIcon className='inline-block size-6'></PlusIcon>
+            </button>
+        </div>
+    </div>
 }

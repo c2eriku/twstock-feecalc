@@ -1,26 +1,24 @@
 'use client';
-
 import { useState } from "react";
 
-export default function TxnTypeRadio() {
+export default function TxnTypeRadio({onChange}) {
     const [type, setType] = useState('spot');
 
     function handleChange(value) {
-        setType(value)
+        setType(value);
     }
 
     return (
         <div className='flex flex-row gap-2'>
-            {type}
-            <RadioInput id={'spot'} onChange={(e) => handleChange(e.target.value)}>現買賣</RadioInput>
-            <RadioInput id={'daily'} onChange={(e) => handleChange(e.target.value)}>當沖</RadioInput>
+            <RadioInput id={'spot'} onChange={onChange}>現買賣</RadioInput>
+            <RadioInput id={'daily'} onChange={onChange}>當沖</RadioInput>
         </div>
     );
 }
 
 function RadioInput({ children, id, onChange }) {
     return <div className='inline-block transition-all'>
-        <label for={id} className='
+        <label htmlFor={id} className='
         transition-all ease-in-out duration-200
         bg-white
         border
