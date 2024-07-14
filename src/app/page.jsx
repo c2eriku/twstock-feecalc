@@ -3,7 +3,7 @@ import { useState } from "react";
 import FeeInfomation from "./(components)/FeeInfomation";
 import PriceInput from "./(components)/PriceInput";
 import TxnTypeRadio from "./(components)/TxnTypeRadio";
-import FeeDiscount from "./(components)/FeeDiscountAutocomplete";
+import FeeDiscount from "./(components)/FeeDiscount";
 
 
 export default function Home() {
