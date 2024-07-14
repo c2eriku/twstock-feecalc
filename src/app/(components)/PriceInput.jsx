@@ -26,7 +26,7 @@ export default function PriceInput({ onChange }) {
                 <MinusIcon className='inline-block size-6'></MinusIcon>
             </button>
 
-            <input type="number" pattern="\d*" className='p-1 w-full text-xl text-center' value={price} onChange={handleChange} style={{ height: height }}></input>
+            <input type="number"  inputmode="decimal" className='p-1 w-full text-xl text-center' value={price} onChange={handleChange} style={{ height: height }}></input>
 
             <button dir="rtl" className='bg-gray-300 w-16'
                 onClick={() => handleClick(true)} style={{ height: height }}>
