@@ -16,5 +16,10 @@ export default function FeeDiscount() {
             renderInput={(params) => <TextField {...params} label="Movie" />}
         />
 
+        <select>
+            <option>123</option>
+            <option>456</option>
+        </select>
+
     </div>
 }
