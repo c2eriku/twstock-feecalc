@@ -1,13 +1,6 @@
 'use client';
-import { useState } from "react";
 
-export default function TxnTypeRadio({onChange}) {
-    const [type, setType] = useState('spot');
-
-    function handleChange(value) {
-        setType(value);
-    }
-
+export default function TxnTypeRadio({ onChange }) {
     return (
         <div className='flex flex-row gap-2'>
             <RadioInput id={'spot'} onChange={onChange}>現買賣</RadioInput>
@@ -28,7 +21,7 @@ function RadioInput({ children, id, onChange }) {
         has-[:checked]:border-indigo-500'>
             <input className='hidden peer'
                 type="radio" name="type" id={id} value={id}
-                onChange={onChange}
+                onChange={onChange} defaultChecked={id === 'spot'}
             />
             {/* <CheckIcon className='hidden size-4 peer-checked:inline-block'></CheckIcon> */}
             <span>{children}</span>

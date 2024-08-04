@@ -12,7 +12,7 @@ export default function FeeInfomation({ buyPrice, sellPrice, txnType, discountRa
 
     function getTaxFee(p) {
         const price = new Decimal(p * 1000);
-        const tax = price.mul(txnType === 'daily' ? 0.03 : 0.15);
+        const tax = price.mul(txnType === 'spot' ? 0.003 : 0.0015).toNearest(1);
         return tax.toNumber();
     }
 
