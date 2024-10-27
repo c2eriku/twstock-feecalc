@@ -1,8 +1,8 @@
 import Decimal from "decimal.js";
 
-
-export default function FeeInfomation({ buyPrice, sellPrice, txnType, discountRate }) {
-    const TW_TAX_RATE = 0.001425;
+export function CalcOutput({ price, txnType, discountRate }) {
+    console.log(price)
+    const TW_TAX_RATE = 0.1425;
 
     function getBrokerFee(p) {
         const price = new Decimal(p * 1000);
@@ -28,25 +28,8 @@ export default function FeeInfomation({ buyPrice, sellPrice, txnType, discountRa
         return revenue.toNumber();
     }
 
-    return <div className="flex flex-col">
-
-        <div>
-            <div>買入成本</div>
-            <span>{buyPrice} + {buyPrice}*0.1425%*{discountRate} = {getBuyCost(buyPrice)}</span>
-            <span>{ }</span>
-        </div>
-
-        <div>
-            <div>賣出成本</div>
-            <span>{sellPrice} - {sellPrice}*0.1425%*{discountRate} - {getTaxFee(sellPrice)} = {getSellRevenue(sellPrice)}</span>
-            <span>{ }</span>
-        </div>
-
-        <div>
-            <div>收益</div>
-            <span>{getSellRevenue(sellPrice) - getBuyCost(buyPrice)}</span>
-        </div>
-
-
-    </div>
+    return <section className="flex">
+        <p className="w-1/3">收益</p>
+        
+    </section>
 }

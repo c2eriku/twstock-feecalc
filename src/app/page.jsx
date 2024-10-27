@@ -1,22 +1,25 @@
 "use client";
 import { useReducer, useState } from "react";
-import FeeInfomation from "./(components)/FeeInfomation";
 import PriceInput from "./(components)/PriceInput";
 import TxnTypeRadio from "./(components)/TxnTypeRadio";
 import DiscountRate from "./(components)/DiscountRate";
+import FeeInformation from "./(components)/FeeInformation";
+import { CalcOutput } from "./(components)/CalcOutput";
+import { Price } from "./(utils)/Price";
 
 
 export default function Home() {
   const [txnType, setTxnType] = useState('spot');
   const [discountRate, setDiscountRate] = useState(1);
 
-  const [price, dispatch] = useReducer(priceReducer, { buy: 0, sell: 0 });
+  const [price, dispatch] = useReducer(priceReducer, new Price());
 
   return (
     <main className="flex flex-col">
-      <nav className="flex items-center justify-center bg-teal-500 p-4">
+      <nav className="flex items-center justify-center bg-teal-500 p-4 gap-4">
         <DiscountRate
           onFeeDiscountChange={(e) => { setDiscountRate(e.target.value) }}></DiscountRate>
+        <TxnTypeRadio onChange={(e) => setTxnType(e.target.value)}></TxnTypeRadio>
       </nav>
 
 
@@ -28,13 +31,12 @@ export default function Home() {
           <div>
             <PriceInput title={'賣出價格'} type='sell' dispatch={dispatch} value={price.sell}></PriceInput>
           </div>
-          <div className='col-span-2'>
-            <TxnTypeRadio onChange={(e) => setTxnType(e.target.value)}></TxnTypeRadio>
-          </div>
         </div>
 
-        <div className="mt-2">
-          <FeeInfomation buyPrice={price.buy} sellPrice={price.sell} txnType={txnType} discountRate={discountRate}></FeeInfomation>
+        <div className="m-2">
+          <FeeInformation mode='buy' price={price.buy} txnType={txnType} discountRate={discountRate}></FeeInformation>
+          <FeeInformation mode='sell' price={price.sell} txnType={txnType} discountRate={discountRate}></FeeInformation>
+          <CalcOutput price={price} txnType={txnType} discountRate={discountRate}></CalcOutput>
         </div>
       </div>
     </main>
