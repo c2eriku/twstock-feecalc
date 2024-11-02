@@ -1,9 +1,15 @@
 import { useState } from "react"
 
-export default function AmountInput({ unit, setUnit, dispatch }) {
+export default function AmountInput({ unit: units, amount: amounts, dispatch }) {
 
-    const [amount, setAmount] = useState(0);
+    const [unit, setUnit] = useState(units);
+    const [amount, setAmount] = useState(amounts);
 
+    function handleUnitChange(event) {
+        const changeVal = Number(event);
+        setUnit(changeVal);
+        dispatch({ type: 'unit', value: changeVal });
+    }
 
     function handleChange(event) {
         const changeVal = Number(event.target.value);
@@ -21,7 +27,7 @@ export default function AmountInput({ unit, setUnit, dispatch }) {
     return <section>
         <div className='flex mb-2 gap-2'>
             <label>交易股數</label>
-            <AmountRadio setUnit={setUnit}></AmountRadio>
+            <AmountRadio unit={unit} handleUnitChange={handleUnitChange}></AmountRadio>
         </div>
         <div className="flex">
             <input type="number" inputMode="decimal"
@@ -44,24 +50,25 @@ export default function AmountInput({ unit, setUnit, dispatch }) {
 
 
 
-function AmountRadio({ setUnit }) {
+function AmountRadio({ unit, handleUnitChange }) {
     return (
         <div className='flex flex-row gap-2'>
-            <RadioInput id={1000} setUnit={setUnit}>整股</RadioInput>
-            <RadioInput id={1} setUnit={setUnit}>零股</RadioInput>
+            <RadioInput id={1000} unit={unit} onchange={handleUnitChange}>整股</RadioInput>
+            <RadioInput id={1} unit={unit} onchange={handleUnitChange}>零股</RadioInput>
         </div>
     );
 }
 
-function RadioInput({ children, id, setUnit }) {
+function RadioInput({ children, id, unit, onchange }) {
 
     function handleChange(event) {
         const value = event.target.value;
-        setUnit(Number(value));
+        onchange(Number(value));
     }
 
     return <div className='inline-block transition-all'>
         <label htmlFor={id} className='
+        p-1
         transition-all ease-in-out duration-200
         bg-white
         border
@@ -70,9 +77,9 @@ function RadioInput({ children, id, setUnit }) {
         has-[:checked]:text-indigo-100 
         has-[:checked]:border-indigo-500'>
             <input className='hidden peer'
-                type="radio" name="amount" id={id} value={id}
+                type="radio" name="unit" id={id} value={id}
                 onChange={handleChange}
-                defaultChecked={id === 1000}
+                defaultChecked={id === unit}
             />
             <span>{children}</span>
         </label>

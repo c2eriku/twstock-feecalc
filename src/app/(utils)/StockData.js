@@ -7,9 +7,9 @@ export default class StockData {
         Object.assign(this, stockData);
     }
 
-    buy = 0;
-    sell = 0;
-    amount = 0;
+    buy = 10;
+    sell = 10;
+    amount = 1;
     unit = 1000;
     discountRate = 1;
     txnType = 'spot';
