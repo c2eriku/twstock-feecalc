@@ -1,15 +1,25 @@
 "use client";
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TwStockPrice } from '../(utils)/twstockFeeRule';
 import { ArrowPathIcon, MinusIcon, PlusIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 
 const height = '42px';
 
-export default function PriceInput({ price, title, type, sync, dispatch }) {
+export default function PriceInput({ price: prices, title, type, sync, dispatch }) {
+
+    const inputRef = useRef(null);
+    const [price, setPrice] = useState(prices);
 
     function handleFuncBtnClick(action) {
         const p = action ? TwStockPrice(price).next() : TwStockPrice(price).prev();
         updateValue(p);
+    }
+
+    function handleFocus() {
+        if (inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
     }
 
     function handleChange(event) {
@@ -19,6 +29,7 @@ export default function PriceInput({ price, title, type, sync, dispatch }) {
 
     function updateValue(updVal) {
         const typex = sync ? 'sync' : type;
+        setPrice(updVal);
         dispatch({ type: typex, value: updVal });
     }
 
@@ -33,7 +44,10 @@ export default function PriceInput({ price, title, type, sync, dispatch }) {
                 <MinusIcon className='inline-block size-6'></MinusIcon>
             </button>
 
-            <input type="number" inputMode="decimal" className='p-1 w-full text-xl text-center' value={price} onChange={handleChange} style={{ height: height }}></input>
+            <input ref={inputRef} type="number" inputMode="decimal" className='p-1 w-full text-xl text-center'
+                value={price}
+                onFocus={handleFocus}
+                onChange={handleChange} style={{ height: height }}></input>
 
             <button dir="rtl" className='bg-gray-300 border-2 border-gray-300 w-16'
                 onClick={() => handleFuncBtnClick(true)} style={{ height: height }}>

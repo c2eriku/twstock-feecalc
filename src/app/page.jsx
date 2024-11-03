@@ -30,16 +30,7 @@ export default function Home() {
           <PricePanel dispatch={dispatch} stockData={stockData}></PricePanel>
         </section>
 
-        <div className="grid grid-cols-2 gap-4">
-          {/* <div>
-            <PriceInput title={'買入價格'} type='buy' dispatch={dispatch} price={stockData.buy}></PriceInput>
-          </div>
-          <div>
-            <PriceInput title={'賣出價格'} type='sell' dispatch={dispatch} price={stockData.sell}></PriceInput>
-          </div> */}
-        </div>
-
-        <div className='mt-2'>
+        <div className='mt-4'>
           <AmountInput
             unit={stockData.unit}
             amount={stockData.amount}
