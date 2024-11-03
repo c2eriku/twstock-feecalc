@@ -31,7 +31,7 @@ function RadioInput({ children, id, type, onchange }) {
         transition-all ease-in-out duration-200
         bg-white
         border
-        rounded text-3xl
+        rounded text-xl
         has-[:checked]:bg-indigo-400
         has-[:checked]:text-indigo-100 
         has-[:checked]:border-indigo-500'>

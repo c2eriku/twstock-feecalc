@@ -1,0 +1,39 @@
+.customSelect {
+  position: relative;
+  width: 200px;
+}
+
+.selectBox {
+  cursor: pointer;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.optionsContainer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

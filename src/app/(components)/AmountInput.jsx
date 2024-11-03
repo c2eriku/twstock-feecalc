@@ -32,15 +32,18 @@ export default function AmountInput({ unit: units, amount: amounts, dispatch }) 
     return <section>
         <div className='flex mb-2 gap-2'>
             <label>交易股數</label>
-            <AmountRadio unit={unit} handleUnitChange={handleUnitChange}></AmountRadio>
+
         </div>
         <div className="flex flex-col">
 
             <div className="flex mb-2">
                 <input type="number" inputMode="decimal"
-                    className='border border-gray-300 rounded mr-2 p-1 w-5/6 text-xl text-center'
+                    className='border border-gray-300 rounded-l p-1 w-1/2 text-xl text-center'
                     value={amount} onChange={handleChange}></input>
-                <button className="px-2 rounded w-1/6 bg-red-400" onClick={handleClear}>clear</button>
+                <div className="w-4/12 mr-4">
+                    <AmountRadio unit={unit} handleUnitChange={handleUnitChange}></AmountRadio>
+                </div>
+                <button className="px-2 rounded w-2/12 bg-red-400" onClick={handleClear}>clear</button>
             </div>
 
             <div className="flex flex-row-reverse justify-between">
@@ -62,36 +65,38 @@ export default function AmountInput({ unit: units, amount: amounts, dispatch }) 
 
 function AmountRadio({ unit, handleUnitChange }) {
     return (
-        <div className='flex flex-row gap-2'>
+        <div className='flex flex-row items-center h-full'>
             <RadioInput id={1000} unit={unit} onchange={handleUnitChange}>整股</RadioInput>
-            <RadioInput id={1} unit={unit} onchange={handleUnitChange}>零股</RadioInput>
+            <RadioInput id={1} unit={unit} onchange={handleUnitChange} className='rounded-r'>零股</RadioInput>
         </div>
     );
 }
 
-function RadioInput({ children, id, unit, onchange }) {
+function RadioInput({ children, id, unit, onchange, className }) {
 
     function handleChange(event) {
         const value = event.target.value;
         onchange(Number(value));
     }
 
-    return <div className='inline-block transition-all'>
-        <label htmlFor={id} className='
+    return <div className='block w-full h-full transition-all'>
+        <label htmlFor={id} className={`
+        ${className}
+        flex justify-center
+        w-full h-full
         p-1
         transition-all ease-in-out duration-200
         bg-white
         border
-        rounded
         has-[:checked]:bg-indigo-400
         has-[:checked]:text-indigo-100 
-        has-[:checked]:border-indigo-500'>
+        has-[:checked]:border-indigo-500`}>
             <input className='hidden peer'
                 type="radio" name="unit" id={id} value={id}
                 onChange={handleChange}
                 defaultChecked={id === unit}
             />
-            <span>{children}</span>
+            <div className="flex items-center">{children}</div>
         </label>
     </div>
 }

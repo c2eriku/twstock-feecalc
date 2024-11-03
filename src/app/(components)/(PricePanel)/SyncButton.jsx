@@ -1,5 +1,5 @@
 
-import { ArrowsRightLeftIcon } from "@heroicons/react/24/solid";
+import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/solid";
 
 export default function SyncButton({ sync, setSync }) {
 
@@ -11,6 +11,6 @@ export default function SyncButton({ sync, setSync }) {
         ${sync ? '' : 'text-white'}
         w-8 stroke-gray-500`}
         onClick={handleClick}>
-        <ArrowsRightLeftIcon></ArrowsRightLeftIcon>
+        <ArrowPathRoundedSquareIcon></ArrowPathRoundedSquareIcon>
     </button>
 }

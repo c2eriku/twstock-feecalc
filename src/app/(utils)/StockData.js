@@ -11,7 +11,7 @@ export default class StockData {
     sell = 10;
     amount = 1;
     unit = 1000;
-    discountRate = 1;
+    discountRate = 0.28;
     txnType = 'spot';
 
     get buyCost() {

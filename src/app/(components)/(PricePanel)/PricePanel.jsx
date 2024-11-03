@@ -12,8 +12,8 @@ export default function PricePanel({ stockData, dispatch }) {
         dispatch({ type: typex, value: event });
     }
 
-    return <div className="flex">
-        <div className='w-auto'>
+    return <div className="flex justify-between">
+        <div className='w-5/12'>
             <PriceInput
                 title={'買入價格'}
                 onchange={(e) => updatePrice(e, 'buy')}
@@ -21,10 +21,11 @@ export default function PricePanel({ stockData, dispatch }) {
         </div>
 
         <div className="mx-2 mt-6 flex">
+            
             <SyncButton sync={sync} setSync={setSync}></SyncButton>
         </div>
 
-        <div className='w-auto'>
+        <div className='w-5/12'>
             <PriceInput
                 title={'賣出價格'}
                 onchange={(e) => updatePrice(e, 'sell')}
