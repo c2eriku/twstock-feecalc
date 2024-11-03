@@ -1,19 +1,13 @@
 "use client";
 import { useRef, useState } from 'react';
-import { TwStockPrice } from '../(utils)/twstockFeeRule';
-import { ArrowPathIcon, MinusIcon, PlusIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
+import { TwStockPrice } from '../../(utils)/twstockFeeRule';
+import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 
 const height = '42px';
 
-export default function PriceInput({ price: prices, title, type, sync, dispatch }) {
+export default function PriceInput({ price, title, sync, dispatch, onchange }) {
 
     const inputRef = useRef(null);
-    const [price, setPrice] = useState(prices);
-
-    function handleFuncBtnClick(action) {
-        const p = action ? TwStockPrice(price).next() : TwStockPrice(price).prev();
-        updateValue(p);
-    }
 
     function handleFocus() {
         if (inputRef.current) {
@@ -22,15 +16,15 @@ export default function PriceInput({ price: prices, title, type, sync, dispatch 
         }
     }
 
-    function handleChange(event) {
-        const changeVal = Number(event.target.value);
-        updateValue(changeVal);
+    function handleFuncBtnClick(action) {
+        const resPrice = action ? TwStockPrice(price).next() : TwStockPrice(price).prev();
+        onchange(resPrice);
     }
 
-    function updateValue(updVal) {
-        const typex = sync ? 'sync' : type;
-        setPrice(updVal);
-        dispatch({ type: typex, value: updVal });
+    function handleChange(event) {
+        const value = event.target.value;
+        const valueNum = Number(value);
+        onchange(valueNum);
     }
 
     return <div>

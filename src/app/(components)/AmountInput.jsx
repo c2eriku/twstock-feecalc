@@ -35,17 +35,21 @@ export default function AmountInput({ unit: units, amount: amounts, dispatch }) 
             <AmountRadio unit={unit} handleUnitChange={handleUnitChange}></AmountRadio>
         </div>
         <div className="flex flex-col">
-            <input type="number" inputMode="decimal"
-                className='border border-gray-300 rounded mb-2 p-1 text-xl text-center'
-                value={amount} onChange={handleChange}></input>
+
+            <div className="flex mb-2">
+                <input type="number" inputMode="decimal"
+                    className='border border-gray-300 rounded mr-2 p-1 w-5/6 text-xl text-center'
+                    value={amount} onChange={handleChange}></input>
+                <button className="px-2 rounded w-1/6 bg-red-400" onClick={handleClear}>clear</button>
+            </div>
+
             <div className="flex flex-row-reverse justify-between">
-                {[1, 5, 10, 50].map((val, idx) => (
+                {[1, 5, 10, 50, 100].map((val, idx) => (
                     <button key={idx}
-                        className="bg-gray-300 w-12 rounded p-1 text-xl text-center"
+                        className="bg-gray-300 w-16 rounded p-1 text-xl text-center"
                         value={val}
                         onClick={handleClick}>+{val}</button>
                 ))}
-                <button className="px-2 rounded bg-red-400" onClick={handleClear}>clear</button>
             </div>
         </div>
     </section>

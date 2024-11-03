@@ -9,7 +9,7 @@ export default function FeeInformation({ stockData }) {
             <p className="w-1/3">證券交易稅</p>
             <p className="w-1/3"></p>
             <output className="w-1/3 text-right px-2">
-                {stockData.getTaxFee(stockData.sell)}
+                {stockData.getTaxFee()}
             </output>
         </>
     }
@@ -51,7 +51,7 @@ export default function FeeInformation({ stockData }) {
 
             <div className="flex">
                 <label className="w-1/3">券商手續費</label>
-                <output className="w-2/3 text-right px-2">{stockData.getbrokerFee(stockData.buy)}</output>
+                <output className="w-2/3 text-right px-2">{stockData.getbrokerFee(stockData.sell)}</output>
             </div>
 
             <div className="flex">

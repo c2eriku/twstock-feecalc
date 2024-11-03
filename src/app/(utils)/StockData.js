@@ -43,8 +43,8 @@ export default class StockData {
         return fee.toNumber();
     }
 
-    getTaxFee(p) {
-        const totalAmount = new Decimal(p).mul(this.amount).mul(this.unit);
+    getTaxFee() {
+        const totalAmount = new Decimal(this.sell).mul(this.amount).mul(this.unit);
         const tax = totalAmount.mul(this.txnType === 'spot' ? 0.003 : 0.0015).toNearest(2);
         return tax.toNumber();
     }

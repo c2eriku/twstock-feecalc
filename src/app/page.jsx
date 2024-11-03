@@ -1,13 +1,12 @@
 "use client";
 import { useReducer } from "react";
-import PriceInput from "./(components)/PriceInput";
 import TxnTypeRadio from "./(components)/TxnTypeRadio";
 import DiscountRate from "./(components)/DiscountRate";
 import FeeInformation from "./(components)/FeeInformation";
 import CalcOutput from "./(components)/CalcOutput";
 import AmountInput from "./(components)/AmountInput";
 import StockData from "./(utils)/StockData";
-import PricePanel from "./(components)/PricePanel";
+import PricePanel from "./(components)/(PricePanel)/PricePanel";
 
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col">
-      <nav className="flex items-center justify-center bg-teal-500 p-4 gap-4">
+      <nav className="flex items-center justify-center bg-gray-500 p-4 gap-4">
         <DiscountRate
           discountRate={stockData.discountRate}
           dispatch={dispatch}></DiscountRate>
